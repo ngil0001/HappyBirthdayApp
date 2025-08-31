@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import com.example.happybirthdayapp.ui.theme.HappyBirthdayAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -82,7 +83,9 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
         GreetingText(
             message = message,
             from = from,
-            modifier = Modifier.fillMaxSize().padding(8.dp) //Keeps the modifier overrides
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp) //Keeps the modifier overrides
         )
     }
 }
@@ -92,6 +95,9 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
 fun BirthdayCardPreview() {
     HappyBirthdayAppTheme {
         //function call -- one argument
-        GreetingImage(message = "Happy Birthday Noah!", from = "From Noah")
+        GreetingImage(
+            message = stringResource(R.string.happy_birthday_text),
+            from = stringResource(R.string.signature_text)
+        )
     }
 }
