@@ -20,6 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.layout.ContentScale
 import com.example.happybirthdayapp.ui.theme.HappyBirthdayAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,7 +35,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingText(message = "Happy Birthday Noah!", from = "From Noah", modifier = Modifier.padding(8.dp))
+                    GreetingImage(message = "Happy Birthday Noah!", from = "From Noah", modifier = Modifier.padding(8.dp))
                 }
             }
         }
@@ -69,10 +71,20 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) {
     val image = painterResource(R.drawable.androidparty)
-    Image(
-        painter = image,
-        contentDescription = null
-    )
+    Box(modifier) {
+        Image(
+            painter = image,
+            contentDescription = null,
+            contentScale = ContentScale.Crop, //crops image to screen size
+            alpha = 0.5F //opacity of image 0F = fully transparent
+        )
+        //Calls the greetingText and passes the vars to display the next over the image
+        GreetingText(
+            message = message,
+            from = from,
+            modifier = Modifier.fillMaxSize().padding(8.dp) //Keeps the modifier overrides
+        )
+    }
 }
 
 @Preview(showBackground = true)
